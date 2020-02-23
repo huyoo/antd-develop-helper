@@ -3,11 +3,9 @@
  * @author: hy
  * @date: 2020/2/22
  */
-import React, {Component, Fragment} from 'react';
+import React, {Component} from 'react';
 import {Input} from 'antd'
-import cls from 'classnames'
-import styles from './ss.less'
-
+import styles from './index.module.less'
 
 const {TextArea} = Input;
 
@@ -26,8 +24,8 @@ class ColumnBuilder extends Component {
 		// console.log(styles);
 
 		return (
-				<div style={{display: "flow"}} className='container'>
-					<div className={styles.containers}>
+				<div style={{display: "flow"}} className={styles.containers}>
+					<div >
 						test
 						<TextArea/>
 					</div>
