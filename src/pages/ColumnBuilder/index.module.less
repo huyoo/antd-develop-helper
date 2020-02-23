@@ -1,5 +1,26 @@
 
-.containers{
-  width: 80px;
-  height: 90px;
+.containers {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+
+  & > div {
+    height: inherit;
+  }
+
+  :global {
+    .inputArea {
+      flex-grow: 3;
+    }
+
+    .operateArea {
+      flex-grow: 2;
+      background-color: #1c2b36;
+      color: #96abbb;
+    }
+
+    .outputArea {
+      flex-grow: 3;
+    }
+  }
 }
