@@ -2,6 +2,7 @@
 1. 表格columns的快速生成，包含宽度、多语言
 ## 开发日记
 1. 2020.02.22 创建项目
+2. 2020.02.24 增加表头创建工具
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
