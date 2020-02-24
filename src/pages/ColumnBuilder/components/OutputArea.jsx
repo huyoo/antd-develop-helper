@@ -3,17 +3,31 @@
  * @author: hy
  * @date: 2020/2/23
  */
-import React from "react";
-import {Input, message} from 'antd'
+import React, {useState} from "react";
+import {Input, message, Switch} from 'antd'
+import styles from './OutputArea.module.less'
 
 const {TextArea} = Input;
 
 export default function OutputArea({inputObject, optionalConfig = {}}) {
-	let str = createColumn(inputObject, optionalConfig);
-	str = columnTransferToString(str);
+	const [showLang, setShowLang] = useState(false);
+	let str = '';
+	if (showLang) {
+		str = createLangObject(inputObject, optionalConfig)
+	} else {
+		str = createColumn(inputObject, optionalConfig);
+		str = columnTransferToString(str);
+	}
 
-	return <div>
-		<TextArea value={str} style={{height: '100vh'}} onClick={handleClick}/>
+	function handleSwitchChange() {
+		setShowLang(!showLang)
+	}
+
+	return <div className={styles.outputArea}>
+		<div className='tool-bar'>
+			{optionalConfig.needLang ? <div>多语言：<Switch title='切换到多语言' onClick={handleSwitchChange}/></div> : null}
+		</div>
+		<TextArea value={str} className='text-area' onClick={handleClick}/>
 	</div>
 }
 
@@ -64,8 +78,8 @@ function columnTransferToString(columns) {
 }
 
 // 由原始对象生成表头
-function createLangObject(sourceData) {
-	const lang = document.getElementById('langBefore').value || '';
+function createLangObject(sourceData, option) {
+	const lang = option.beforeLang || '';
 	let str = '';
 	Object.keys(sourceData).forEach(item => {
 		str += `'${lang}${item}': '${sourceData[item]}',\n`
