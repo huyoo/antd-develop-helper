@@ -15,8 +15,8 @@ class OperateOptionForm extends Component {
 		const {form: {getFieldDecorator, getFieldValue}} = this.props;
 		return (
 				<Form className={styles.operateOptionForm}
-				      labelCol={{span: 6}}
-				      wrapperCol={{span: 16}}>
+				      labelCol={{span: 8}}
+				      wrapperCol={{span: 15}}>
 					<FormItem label='多语言'>
 						{getFieldDecorator('needLang', {
 							valuePropName: 'checked',

@@ -1,26 +1,33 @@
 
 .containers {
-  display: flex;
-  height: 100vh;
   overflow: hidden;
+  width: 100vw;
+  height: 100vh;
 
   & > div {
-    height: inherit;
+    float: left;
   }
 
   :global {
     .inputArea {
-      flex-grow: 3;
+      width: 60%;
+      transition: width .5s;
     }
 
     .operateArea {
-      flex-grow: 2;
+      width: 40%;
+      height: 100vh;
       background-color: #1c2b36;
       color: #96abbb;
     }
 
     .outputArea {
-      flex-grow: 3;
+      width: 60%;
+    }
+
+    .hide {
+      width: 0!important;
+      visibility: hidden;
     }
   }
 }

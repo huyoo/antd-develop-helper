@@ -1,27 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import ColumnBuilder from "./pages/ColumnBuilder";
 
-function App() {
-	return <ColumnBuilder/>
-  // return (
-  //   <div className="App">
-  //     <header className="App-header">
-  //       <img src={logo} className="App-logo" alt="logo" />
-  //       <p>
-  //         Edit <code>src/App.js</code> and save to reload.
-  //       </p>
-  //       <a
-  //         className="App-link"
-  //         href="https://reactjs.org"
-  //         target="_blank"
-  //         rel="noopener noreferrer"
-  //       >
-  //         Learn React
-  //       </a>
-  //     </header>
-  //   </div>
-  // );
-}
+export default class App extends Component {
+	componentDidMount() {
+		document.getElementById('loading').style.display = 'none';
+	}
 
-export default App;
+	render() {
+		return <ColumnBuilder/>
+	}
+}

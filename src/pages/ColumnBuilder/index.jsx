@@ -5,6 +5,7 @@
  */
 import React, {Component} from 'react';
 import {Button, Input} from 'antd'
+import cls from 'classnames'
 import styles from './index.module.less'
 import OperateOptionForm from "./components/OperateOptionForm";
 import OutputArea from "./components/OutputArea";
@@ -12,6 +13,8 @@ import OutputArea from "./components/OutputArea";
 const {TextArea} = Input;
 
 class ColumnBuilder extends Component {
+	formRef = null;
+
 	constructor(props) {
 		super(props);
 
@@ -21,7 +24,6 @@ class ColumnBuilder extends Component {
 			inputObject: '',
 			optionalConfig: {}
 		};
-		this.formRef = null;
 	}
 
 	// 存放输入文本域
@@ -48,7 +50,6 @@ class ColumnBuilder extends Component {
 
 	// 生成表头
 	handleRender = () => {
-		const {showOutputArea, showInputArea} = this.state;
 		let passValidate = false, optionalConfig = null;
 
 		this.formRef.validateFieldsAndScroll((err, values) => {
@@ -72,7 +73,7 @@ class ColumnBuilder extends Component {
 
 		return (
 				<div className={styles.containers}>
-					<div className='inputArea' style={{display: showInputArea ? '' : 'none'}}>
+					<div className={cls('inputArea', {hide: showOutputArea})}>
 						<TextArea onChange={this.handleInputChange} style={{height: '100vh'}}/>
 					</div>
 					<div className='operateArea'>
@@ -80,11 +81,9 @@ class ColumnBuilder extends Component {
 						{showInputArea || <Button onClick={this.handleBack}>返回</Button>}
 						<Button type='primary' onClick={this.handleRender}>启动</Button>
 					</div>
-					{
-						showOutputArea ? <div className='outputArea'>
-								<OutputArea inputObject={inputObject} optionalConfig={optionalConfig}/>
-							</div> : null
-					}
+					<div className={cls('outputArea', {hide: showInputArea})}>
+						<OutputArea inputObject={inputObject} optionalConfig={optionalConfig}/>
+					</div>
 				</div>
 		);
 	}
