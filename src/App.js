@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import ColumnBuilder from "./pages/ColumnBuilder";
+import Routers from "./config/router.config";
 
 export default class App extends Component {
 	componentDidMount() {
@@ -8,6 +8,6 @@ export default class App extends Component {
 	}
 
 	render() {
-		return <ColumnBuilder/>
+		return <Routers/>
 	}
 }

@@ -1,19 +1,20 @@
 /**
- * @decs: 表头创建
+ * @decs: 表单快速生成工具
  * @author: hy
- * @date: 2020/2/22
+ * @date: 2020/4/14
  */
 import React, {Component} from 'react';
-import {Button, Input} from 'antd'
-import cls from 'classnames'
-import styles from './index.module.less'
+// import PropTypes from 'prop-types';
+import {Button, Input} from "antd";
+import cls from "classnames";
+import styles from "./index.module.less";
 import OperateOptionForm from "./components/OperateOptionForm";
 import OutputArea from "./components/OutputArea";
 import MenuAction from "../../components/MenuAction";
 
 const {TextArea} = Input;
 
-class ColumnBuilder extends Component {
+class FormBuilder extends Component {
 	formRef = null;
 
 	constructor(props) {
@@ -30,7 +31,8 @@ class ColumnBuilder extends Component {
 	// 存放输入文本域
 	handleInputChange = (event) => {
 		const inputValue = event.target.value;
-		const inputObject = inputValue.split(/\n/)
+		const inputObject = inputValue
+				.split(/\n/)
 				.map(item => {
 					item = item.split(':');
 					return {
@@ -91,4 +93,6 @@ class ColumnBuilder extends Component {
 	}
 }
 
-export default ColumnBuilder;
+FormBuilder.propTypes = {};
+
+export default FormBuilder;

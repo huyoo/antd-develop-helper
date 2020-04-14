@@ -1,0 +1,33 @@
+
+.containers {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+
+  & > div {
+    float: left;
+  }
+
+  :global {
+    .inputArea {
+      width: 60%;
+      transition: width .5s;
+    }
+
+    .operateArea {
+      width: 40%;
+      height: 100vh;
+      background-color: #1c2b36;
+      color: #96abbb;
+    }
+
+    .outputArea {
+      width: 60%;
+    }
+
+    .hide {
+      width: 0!important;
+      visibility: hidden;
+    }
+  }
+}
