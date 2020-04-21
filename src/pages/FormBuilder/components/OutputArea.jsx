@@ -15,8 +15,8 @@ export default function OutputArea({inputObject, optionalConfig = {}}) {
 	if (showLang) {
 		str = createLangObject(inputObject, optionalConfig)
 	} else {
-		str = createColumn(inputObject, optionalConfig);
-		str = columnTransferToString(str);
+		str = createFormItem(inputObject, optionalConfig);
+		str = itemTransferToString(str);
 	}
 
 	function handleSwitchChange() {
@@ -38,43 +38,34 @@ function handleClick(e) {
 	message.success('复制成功');
 }
 
-// 由原始对象生成表头
-function createColumn(sourceData, option) {
+// 由原始对象生成表单元素
+function createFormItem(sourceData, option) {
 	return Object.keys(sourceData).map((item) => {
-		let column = {
-			title: sourceData[item],
-			dataIndex: item,
-			width: 120,
-		};
-		if (option.needLang) {
-			column.title = `formatMessage({ id: '${option.beforeLang || ''}${item}', defaultMessage: '${sourceData[item]}' })`
-		}
-
-		if (option.optional) {
-			column.optional = 'true';
-		}
-
-		return column
+		return `
+		<FormItem label='${option.needLang ?
+				`formatMessage({ id: '${option.beforeLang || ''}${item}', defaultMessage: '${sourceData[item]}' })`
+				: sourceData[item]}'>
+		{getFieldDecorator('${item}', {
+				${option.rules ? `rules: [
+				    ${option.maxLength ? `{
+				    max: 5,
+				    message: ${option.needLang ? `formatMessage({ id: 'baf.maxLength', defaultMessage: '最大长度为5' }, { length: 5 })` : `'最大长度为5'`},
+				    },` : ''}
+				    ${option.required ? `{
+				        required: true,
+                message: ${option.needLang ? `formatMessage({ id: 'app.validator.required', defaultMessage: '必填项' })` : `'必填项'`},
+          },` : ''}
+				],` : ''}
+		    ${option.initialValue ? `initialValue: defaultValue.${item} || '',` : ''}
+		    })(<Input/>)}
+		</FormItem>
+`
 	});
 }
 
 // 将对象转换成字符串
-function columnTransferToString(columns) {
-	let str = '';
-	columns.forEach(item => {
-		str += '{\n';
-		for (let key in item) {
-			if (key === 'dataIndex' || key === 'key') {
-				str += `${key}: '${item[key]}',\n`
-			} else {
-				str += `${key}:${item[key]},\n`
-			}
-		}
-		str += '},\n';
-	});
-	str = `[\n${str}\n]`;
-
-	return str
+function itemTransferToString(formItems) {
+	return formItems.join(' ')
 }
 
 // 由原始对象生成表头

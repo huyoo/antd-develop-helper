@@ -1,7 +1,16 @@
 {
   "name": "antd-develop-helper",
-  "version": "0.2.0",
-  "private": true,
+  "version": "0.3.0",
+  "description": "依赖于antd的代码快速生成器",
+  "authors": {
+    "name": "huyoo",
+    "email": "huyu_scls@163.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/huyoo/antd-develop-helper"
+  },
+  "homepage": "https://huyoo.github.io/tools/antdDevelopHelper",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -44,5 +53,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "license": "MIT"
 }

@@ -3,7 +3,7 @@
  * @author: hy
  * @date: 2020/2/23
  */
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import {Checkbox, Form, Input} from "antd";
 import styles from './OperateOptionForm.module.less'
 
@@ -37,6 +37,23 @@ class OperateOptionForm extends Component {
 							initialValue: false
 						})(<Checkbox/>)}
 					</FormItem>
+					{
+						getFieldValue('rules') ?
+								<Fragment>
+									<FormItem label='必填'>
+										{getFieldDecorator('required', {
+											valuePropName: 'checked',
+											initialValue: false
+										})(<Checkbox/>)}
+									</FormItem>
+									<FormItem label='长度限制'>
+										{getFieldDecorator('maxLength', {
+											valuePropName: 'checked',
+											initialValue: false
+										})(<Checkbox/>)}
+									</FormItem>
+								</Fragment> : null
+					}
 					<FormItem label='初始值'>
 						{getFieldDecorator('initialValue', {
 							valuePropName: 'checked',
