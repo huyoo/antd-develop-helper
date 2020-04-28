@@ -15,7 +15,7 @@ export default function OutputArea({inputObject, optionalConfig = {}}) {
 	if (showLang) {
 		str = createLangObject(inputObject, optionalConfig)
 	} else {
-		str = createFormItem(inputObject, optionalConfig);
+		str = optionalConfig.v4 ? createFormItemV4(inputObject, optionalConfig) : createFormItem(inputObject, optionalConfig);
 		str = itemTransferToString(str);
 	}
 
@@ -60,6 +60,16 @@ function createFormItem(sourceData, option) {
 		    })(<Input/>)}
 		</FormItem>
 `
+	});
+}
+
+// 由原始对象生成antd4.0+的表单元素
+function createFormItemV4(sourceData, option) {
+	return Object.keys(sourceData).map((item) => {
+		return `
+		<FormItem label='${option.needLang ?	`formatMessage({ id: '${option.beforeLang || ''}${item}', defaultMessage: '${sourceData[item]}' })`	: sourceData[item]}'  name='${item}'   ${option.rules ? `rules={[${option.maxLength ? `{ max: 5,message: ${option.needLang ? `formatMessage({ id: 'baf.maxLength', defaultMessage: '最大长度为5' }, { length: 5 })` : `'最大长度为5'`},},` : ''} ${option.required ? `{required: true,message: ${option.needLang ? `formatMessage({ id: 'app.validator.required', defaultMessage: '必填项' })` : `'必填项'`},	},` : ''}]}` : ''}>
+		    <Input/>
+		</FormItem>`
 	});
 }
 

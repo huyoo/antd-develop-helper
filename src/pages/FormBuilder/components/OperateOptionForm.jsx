@@ -17,6 +17,12 @@ class OperateOptionForm extends Component {
 				<Form className={styles.operateOptionForm}
 				      labelCol={{span: 8}}
 				      wrapperCol={{span: 15}}>
+					<FormItem label='版本4.+'>
+						{getFieldDecorator('v4', {
+							valuePropName: 'checked',
+							initialValue: false
+						})(<Checkbox/>)}
+					</FormItem>
 					<FormItem label='多语言'>
 						{getFieldDecorator('needLang', {
 							valuePropName: 'checked',
